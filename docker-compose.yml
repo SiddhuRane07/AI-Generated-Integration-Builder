@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  multi-system-integration:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: multi-system-integration
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/configurations"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+
+  # Optional: PostgreSQL for production instead of H2
+  # Uncomment if you want to use PostgreSQL
+  # postgres:
+  #   image: postgres:15-alpine
+  #   container_name: integration-db
+  #   environment:
+  #     POSTGRES_DB: integration_db
+  #     POSTGRES_USER: integration_user
+  #     POSTGRES_PASSWORD: integration_pass
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   restart: unless-stopped
+
+# volumes:
+#   postgres_data:

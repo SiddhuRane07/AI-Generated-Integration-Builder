@@ -1,0 +1,222 @@
+{
+  "info": {
+    "name": "Multi-System Integration API",
+    "description": "API collection for testing multi-system user integration",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080/api",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Configuration Management",
+      "item": [
+        {
+          "name": "Get All Configurations",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/configurations",
+              "host": ["{{baseUrl}}"],
+              "path": ["configurations"]
+            }
+          }
+        },
+        {
+          "name": "Get Active Configurations",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/configurations/active",
+              "host": ["{{baseUrl}}"],
+              "path": ["configurations", "active"]
+            }
+          }
+        },
+        {
+          "name": "Get Configuration by System",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/configurations/calendly",
+              "host": ["{{baseUrl}}"],
+              "path": ["configurations", "calendly"]
+            }
+          }
+        },
+        {
+          "name": "Create/Update Configuration",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"systemName\": \"test-system\",\n  \"apiUrl\": \"https://jsonplaceholder.typicode.com/users\",\n  \"httpMethod\": \"GET\",\n  \"headers\": \"{}\",\n  \"queryParams\": \"{}\",\n  \"requestBody\": \"\",\n  \"fieldMappings\": \"{\\\"id\\\":\\\"externalId\\\",\\\"name\\\":\\\"name\\\",\\\"email\\\":\\\"email\\\",\\\"phone\\\":\\\"phoneNumber\\\"}\",\n  \"dataPath\": \"\",\n  \"active\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/configurations",
+              "host": ["{{baseUrl}}"],
+              "path": ["configurations"]
+            }
+          }
+        },
+        {
+          "name": "Update Calendly Token",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 1,\n  \"systemName\": \"calendly\",\n  \"apiUrl\": \"https://api.calendly.com/users/me\",\n  \"httpMethod\": \"GET\",\n  \"headers\": \"{\\\"Authorization\\\":\\\"Bearer YOUR_CALENDLY_TOKEN\\\",\\\"Content-Type\\\":\\\"application/json\\\"}\",\n  \"queryParams\": \"{}\",\n  \"requestBody\": \"\",\n  \"fieldMappings\": \"{\\\"uri\\\":\\\"externalId\\\",\\\"name\\\":\\\"name\\\",\\\"email\\\":\\\"email\\\",\\\"timezone\\\":\\\"timezone\\\",\\\"avatar_url\\\":\\\"avatarUrl\\\",\\\"scheduling_url\\\":\\\"schedulingUrl\\\"}\",\n  \"dataPath\": \"resource\",\n  \"active\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/configurations",
+              "host": ["{{baseUrl}}"],
+              "path": ["configurations"]
+            }
+          }
+        },
+        {
+          "name": "Delete Configuration",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/configurations/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["configurations", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "User Synchronization",
+      "item": [
+        {
+          "name": "Sync Users from Calendly",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/sync/calendly",
+              "host": ["{{baseUrl}}"],
+              "path": ["sync", "calendly"]
+            }
+          }
+        },
+        {
+          "name": "Sync Users from Specific System",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/sync/test-system",
+              "host": ["{{baseUrl}}"],
+              "path": ["sync", "test-system"]
+            }
+          }
+        },
+        {
+          "name": "Sync Users from All Systems",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/sync/all",
+              "host": ["{{baseUrl}}"],
+              "path": ["sync", "all"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "User Retrieval",
+      "item": [
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users",
+              "host": ["{{baseUrl}}"],
+              "path": ["users"]
+            }
+          }
+        },
+        {
+          "name": "Get Users by System (Calendly)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/calendly",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "calendly"]
+            }
+          }
+        },
+        {
+          "name": "Get Users by System (Custom)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/test-system",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "test-system"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "User Deletion",
+      "item": [
+        {
+          "name": "Clear All Users",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users",
+              "host": ["{{baseUrl}}"],
+              "path": ["users"]
+            }
+          }
+        },
+        {
+          "name": "Clear Users by System",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/calendly",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "calendly"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
